@@ -4,7 +4,7 @@ import { Configuration, OpenAIApi } from "openai";
 import { Octokit } from "@octokit/rest";
 import parseDiff, { Chunk, File } from "parse-diff";
 import minimatch from "minimatch";
-
+const GPT_MODEL: string = core.getInput("GPT_MODEL");
 const GITHUB_TOKEN: string = core.getInput("GITHUB_TOKEN");
 const OPENAI_API_KEY: string = core.getInput("OPENAI_API_KEY");
 
@@ -132,7 +132,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
   reviewComment: string;
 }> | null> {
   const queryConfig = {
-    model: "gpt-4",
+    model: GPT_MODEL,
     temperature: 0.2,
     max_tokens: 700,
     top_p: 1,

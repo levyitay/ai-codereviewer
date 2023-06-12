@@ -7,6 +7,9 @@ inputs:
   OPENAI_API_KEY:
     description: "OpenAI API key for GPT."
     required: true
+  GPT_MODEL:
+    description: "GPT model to user (gpt-4, gpt-3.5-turbo)"
+    default: "gpt-3.5-turbo"
   exclude:
     description: "Glob patterns to exclude files from the diff analysis"
     required: false
