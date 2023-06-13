@@ -89,13 +89,10 @@ function getDiff(owner, repo, pull_number) {
 function analyzeCode(parsedDiff, prDetails) {
     return __awaiter(this, void 0, void 0, function* () {
         const comments = [];
-        console.debug(`numbder of files ${parse_diff_1.default.length}`);
         for (const file of parsedDiff) {
-            console.debug(`file ${file.to}`);
             if (file.to === "/dev/null")
                 continue; // Ignore deleted files
             for (const chunk of file.chunks) {
-                console.debug(`file chunk ${chunk.changes.toString()}`);
                 const prompt = createPrompt(file, chunk, prDetails);
                 const aiResponse = yield getAIResponse(prompt);
                 if (aiResponse) {
@@ -233,9 +230,7 @@ function main() {
             console.log("No diff found");
             return;
         }
-        console.debug(diff);
         const parsedDiff = (0, parse_diff_1.default)(diff);
-        console.debug(`after parseDiff ${parsedDiff.length}`);
         const excludePatterns = core
             .getInput("exclude")
             .split(",")
