@@ -90,9 +90,11 @@ function analyzeCode(parsedDiff, prDetails) {
     return __awaiter(this, void 0, void 0, function* () {
         const comments = [];
         for (const file of parsedDiff) {
+            console.debug(`file ${file}`);
             if (file.to === "/dev/null")
                 continue; // Ignore deleted files
             for (const chunk of file.chunks) {
+                console.debug(`file chunk ${chunk}`);
                 const prompt = createPrompt(file, chunk, prDetails);
                 const aiResponse = yield getAIResponse(prompt);
                 if (aiResponse) {
