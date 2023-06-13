@@ -89,12 +89,13 @@ function getDiff(owner, repo, pull_number) {
 function analyzeCode(parsedDiff, prDetails) {
     return __awaiter(this, void 0, void 0, function* () {
         const comments = [];
+        console.debug(`numbder of files ${parse_diff_1.default.length}`);
         for (const file of parsedDiff) {
-            console.debug(`file ${file}`);
+            console.debug(`file ${file.to}`);
             if (file.to === "/dev/null")
                 continue; // Ignore deleted files
             for (const chunk of file.chunks) {
-                console.debug(`file chunk ${chunk}`);
+                console.debug(`file chunk ${chunk.changes.toString()}`);
                 const prompt = createPrompt(file, chunk, prDetails);
                 const aiResponse = yield getAIResponse(prompt);
                 if (aiResponse) {

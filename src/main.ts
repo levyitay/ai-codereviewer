@@ -62,12 +62,12 @@ async function analyzeCode(
   prDetails: PRDetails
 ): Promise<Array<{ body: string; path: string; line: number }>> {
   const comments: Array<{ body: string; path: string; line: number }> = [];
-
+  console.debug(`numbder of files ${parseDiff.length}`)
   for (const file of parsedDiff) {
-    console.debug(`file ${file}`);
+    console.debug(`file ${file.to}`);
     if (file.to === "/dev/null") continue; // Ignore deleted files
     for (const chunk of file.chunks) {
-        console.debug(`file chunk ${chunk}`);
+        console.debug(`file chunk ${chunk.changes.toString()}`);
       const prompt = createPrompt(file, chunk, prDetails);
       const aiResponse = await getAIResponse(prompt);
       if (aiResponse) {
